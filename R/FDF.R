@@ -7,7 +7,7 @@
 #' @param argvals  A vector containing the points where the function values are observed. If NULL, assumed to be equally spaced in rangeval.
 #' @param data A matrix, `m x N`, where `N` is the number of curves.
 #' @param stationary Logical, TRUE implies stationarity.
-#' @param h  Number of lags to be used.
+#' @param h  Number of lags to be used to compute the long-run covariance.
 #' @param k  Number of factors to be used. If NULL, then estimated as in the reference.
 #' @param kmax  Maximum number of factors to be tested.
 #' @param p  Number of eigenfunctions to be used in approximating the inverse covariance operator.
