@@ -415,7 +415,7 @@ diff_fd <- function(datafd) {
 sumfg <- function(f,g,s){
   stopifnot(is.numeric(f), is.numeric(g), is.numeric(s)) 
   # Assuming s is sorted - check
-  stopifnot(any(diff(s) < 0))
+  stopifnot(all(diff(s) > 0))
   
   aux.fg <- f * g
   n <- length(s)
@@ -423,7 +423,7 @@ sumfg <- function(f,g,s){
   int <- diff(s) %*% ((aux.fg[2:n] + aux.fg[1:(n-1)]) / 2)
   return(
     list(
-      sum = aux.fg / int, 
+      sum = aux.fg / c(int), 
       norm = int
     )
   )
@@ -471,7 +471,7 @@ sumF <- function(Fmat, s){
 #' @examples rnorm(1)
 prodcf <- function(c, f, s) {
   # Assuming s is sorted
-  stopifnot(any(diff(s) < 0))
+  stopifnot(all(diff(s) > 0))
   stopifnot(is.numeric(c), is.numeric(f), is.numeric(s))
   
   aux.cf <- f^c 
@@ -480,7 +480,7 @@ prodcf <- function(c, f, s) {
   int <- diff(s) %*% (aux.cf[2:n] + aux.cf[1:(n - 1)]) / 2
   return(
     list(
-      cf = aux.cf / int,
+      cf = aux.cf / c(int),
       norm = int
     )
   )

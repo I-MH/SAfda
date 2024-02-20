@@ -23,5 +23,10 @@ then return the product of `f^c`, normalized by that sum.
 #'
 }
 \examples{
-rnorm(1)
+ss<-seq(-4,5,length.out=100)
+f<-dnorm(ss,mean=0,sd=1)
+alp<-2
+alp.times.f<-prodcf(alp,f=f,s=ss)$cf
+plot(ss,f,type="l",lwd=2,col="orange",ylim=c(0,max(f,alp.times.f)))
+lines(ss,alp.times.f,lwd=2,col="green")
 }
