@@ -411,7 +411,15 @@ diff_fd <- function(datafd) {
 #' @return A list of two objects: the `sum` and the `norm` (constant)
 #' @export
 #'
-#' @examples rnorm(1)
+#' @examples ss<-seq(-4,5,length.out=100)
+#' f<-dnorm(ss,mean=0,sd=1)
+#' g<-dnorm(ss,mean=1,sd=sqrt(2))
+#' fpg<-sumfg(f,g,ss)$sum
+#' plot(ss,f,type="l",lwd=2,col="orange",ylim=c(0,max(f,g,fpg)),ylab="",main="f plus g")
+#' lines(ss,g,lwd=2,col="blue")
+#' lines(ss,fpg,lwd=2,col="green")
+#' legend('topright',legen=c("f","g"),col=c("orange","blue"),lty=1)
+
 sumfg <- function(f,g,s){
   stopifnot(is.numeric(f), is.numeric(g), is.numeric(s)) 
   # Assuming s is sorted - check
@@ -468,7 +476,11 @@ sumF <- function(Fmat, s){
 #' @return A list of two objects: the `sum` and the `norm` (constant)
 #' @export
 #'
-#' @examples rnorm(1)
+#' @examples ss<-seq(-4,5,length.out=100) 
+#' f<-dnorm(ss,mean=0,sd=1) alp<-2
+#' alp.times.f<-prodcf(alp,f=f,s=ss)$cf
+#' plot(ss,f,type="l",lwd=2,col="orange",ylim=c(0,max(f,alp.times.f)))
+#' lines(ss,alp.times.f,lwd=2,col="green")
 prodcf <- function(c, f, s) {
   # Assuming s is sorted
   stopifnot(all(diff(s) > 0))
