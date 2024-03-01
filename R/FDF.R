@@ -74,7 +74,7 @@ FDF <- function(argvals = NULL,
   }
 
   # estimate long run cov -----------------------------------
-  result.lrc <- lrc.paper.NoInv(datafd = datafd,
+  result.lrc <- lrc_paper_NoInv(datafd = datafd,
                                 kern_type = kern_type,
                                 h = h,
                                 replicates = replicates

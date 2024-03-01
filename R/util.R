@@ -44,7 +44,7 @@ which_max_v2 <- function(z) {
 clr2density <- function(z, z_step, clr)
 {
   if(fda::is.fd(clr)) {
-    return(exp(eval.fd(z, clr)) / c(trapzc(z_step, exp(eval.fd(z, clr)))))
+    return(exp(eval.fd(z, clr)) / as.vector(trapzc(z_step, exp(eval.fd(z, clr)))))
   } else {
     return(exp(clr) / trapzc(z_step, exp(clr)))
   }
@@ -64,65 +64,6 @@ trapzc <- function(step, y) {
   step * t(y) %*% c(0.5, rep(1, length(y) - 2), 0.5)
 }
 
-################################################################################
-#' long run covariance estimation 
-#' 
-lrc.paper.NoInv <- function(datafd, kern_type,h, replicates){
-  # returns the eigenfunctions of the long run cov
-  kerneltype = switch(kern_type, BT = "Bartlett", PR = "Parzen", 
-                      FT = "flat_top", SP = "Simple", flat="flat")
-  
-  N <- dim(datafd$coefs)[2]
-  nbasis <- datafd$basis$nbasis
-  if(is.null(replicates)){
-    CCh <- matrix(0,nbasis,nbasis)
-    for (j in 1:h) {
-      AuxCCh <- datafd$coefs[,(1+j):N]%*%t(datafd$coefs[,1:(N-j)])+ 
-        t( datafd$coefs[,(1+j):N] %*%  t(datafd$coefs[,1:(N-j)]) )
-      CCh <- CCh + Kernel(j, h,kerneltype)*AuxCCh
-    }
-    CCh <- (CCh + t(CCh))/2 # in case is not symmetric
-  }else{
-    nrep <- length(unique(replicates))
-    CChrep <- array(0,c(nbasis,nbasis, nrep))
-    AllCoeff <- datafd$coefs
-    for (k in 1:nrep) {
-      Coeff <- AllCoeff[,replicates==k]
-      N2 <- dim(Coeff)[2]
-      for (j in 1:h) {
-        AuxCCh <- Coeff[,(1+j):N2]%*%t(Coeff[,1:(N2-j)])+ 
-          t( Coeff[,(1+j):N2] %*%  t(Coeff[,1:(N2-j)]) )
-        CChrep[ , ,k] <- CChrep[,,k] + Kernel(j, h,kerneltype)*AuxCCh
-      }
-      CChrep[ , ,k] <- (CChrep[ , ,k] + t(CChrep[ , ,k]))/2 # in case is not symmetric
-    }
-    CCh <-  apply(CChrep, 1:2, mean)
-    CCh <- (CCh + t(CCh))/2 # in case is not symmetric
-  }
-  
-  xbasis <- datafd$basis
-  Jinprod = inprod(xbasis, xbasis)
-  Jaux <- eigen(Jinprod)
-  Jhalf <- Jaux$vectors%*%diag(sqrt(Jaux$values))%*%t(Jaux$vectors)
-  Jihalf <- solve(Jhalf)
-  Ob <- (1/N)*Jhalf%*%CCh%*%Jhalf
-  result <- eigen(Ob)
-  bb <- Jihalf%*%Re(result$vectors) # coeff of the eigenfunctions
-  eigenval <- Re(result$values) #eigenvalues of the operator
-  eigenf <- fd(Re(bb), basisobj = xbasis)
-  return(list(lrc.k=CCh, Ob=Ob, bb=Re(bb), 
-              eigenf=eigenf, eigenval=eigenval))
-}
-#' @param datafd data in fd class
-#' @param kern_type Type of kernel to be used when estimating the long run covariance operator.
-#' @param h Number of lags to be used to compute the long-run covariance.
-#'
-#' @return list()
-#'   lrc.k: the estimated long run cov
-#'   Ob: (not for users)
-#'   bb: (not for users)
-#'   eigenf: (not for users)
-#'   eigenval: eigenvalues of the long run cov
 
 
 
