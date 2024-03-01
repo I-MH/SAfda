@@ -22,11 +22,10 @@ with possibly irregular bases (from the first-difference of `s`) and
 then return the product of `f * g`, normalized by that sum.
 }
 \examples{
-ss<-seq(0,10,length.out=100)
-f<-dnorm(ss,mean=5,sd=1)
-g<-dnorm(ss,mean=2,sd=sqrt(2))
+ss<-seq(-4,5,length.out=100)
+f<-dnorm(ss,mean=0,sd=1)
+g<-dnorm(ss,mean=1,sd=sqrt(2))
 fpg<-sumfg(f,g,ss)$sum
-
 plot(ss,f,type="l",lwd=2,col="orange",ylim=c(0,max(f,g,fpg)),ylab="",main="f plus g")
 lines(ss,g,lwd=2,col="blue")
 lines(ss,fpg,lwd=2,col="green")
