@@ -32,7 +32,9 @@
 #'   Ob_result: (not for users)
 #' @export
 #'
-#' @examples rnorm(1)
+#' @examples data(Data2011)
+#' m<- 5
+#' factor_output1 <- FDF(data=fd.data,h=24*5,k=m,kmax = 10, kern_type = 'BT',plot=TRUE)
 FDF <- function(argvals = NULL,
                 data,
                 stationary = TRUE,

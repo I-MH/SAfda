@@ -72,7 +72,8 @@ trapzc <- function(step, y) {
 #'
 #' Function to convert factors back into sources
 #' 
-#' @param factor_hat   ??
+#' @param factor_hat  output from FDF.R 
+#' @param dates ??
 #' @param CLR_data    ??
 #' @param fd_data    ??
 #'
@@ -80,7 +81,7 @@ trapzc <- function(step, y) {
 #' @export
 #'
 #' @examples rnorm(1)
-factor_to_sources <- function(factor_hat, CLR_data, fd_data){
+factor_to_sources <- function(factor_hat, dates, CLR_data, fd_data){
 
   # log.x new sequence but can be anything!
   log.x <- CLR_data$x.fine
