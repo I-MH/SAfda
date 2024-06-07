@@ -81,13 +81,13 @@ trapzc <- function(step, y) {
 #' @export
 #'
 #' @examples rnorm(1)
-factor_to_sources <- function(factor_hat, dates, CLR_data, fd_data){
+factor_to_sources <- function(factor_hat, dates, CLR_data, fd_data,flip=TRUE){
 
   # log.x new sequence but can be anything!
   log.x <- CLR_data$x.fine
   
   # num of selected factors
-  kbar <- m   # ****** THIS IS A PROBLEM, NOT DEFINED
+  kbar <- dim(factor_hat$hat.F$coefs)[2]   # ****** THIS IS A PROBLEM, NOT DEFINED
 
   # Transform to Bayes space of factors
   hat.fM <- matrix(0, nrow = length(log.x), ncol = kbar)
@@ -104,7 +104,20 @@ factor_to_sources <- function(factor_hat, dates, CLR_data, fd_data){
     data.frame(dates, factor_hat$hat.beta[, 1:kbar])
   names(SourceContributions) <- c("time", paste0('Factor', 1:kbar))
   
+  
+  if(flip){
   flip.out <- run_flip(SourceProfiles, SourceContributions, log.x)
+  }else{
+    SourceProfiles<-data.frame(SourceProfiles)
+    names(SourceProfiles) <- c(paste0('Factor', 1:kbar))
+    flip.out <-list(
+      SourceProfiles = SourceProfiles,
+      SourceContributions = SourceContributions,
+      signs = rep(1,kbar),
+      sig2 = NULL
+    )
+  }
+  
   betatilde <- TS.contribution(flip.out$SourceProfiles,
                                flip.out$SourceContributions,
                                fd_data,
