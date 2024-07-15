@@ -617,6 +617,6 @@ PNSDdata_fd<-function(Dens,x,n.basis=20,k = 4,
                              norder=k,breaks=knots)
     # Data as Functional object-----------------------------------------------------
     fd.data = fd(b_coef,B) 
-    return(list(CLRData,fd.data))
+    return(list(CLRData=CLRData,fd.data=fd.data))
   }
 
