@@ -30,7 +30,7 @@ data.fd(
 fill in
 }
 \description{
-Form a `fd` object from input data.
+Form a `fd` object from input data (without positive constrain)
 }
 \examples{
 rnorm(1)

@@ -65,5 +65,7 @@ list()
 FDF
 }
 \examples{
-rnorm(1)
+data(Data2011)
+m<- 5
+factor_output1 <- FDF(data=fd.data,h=24*5,k=m,kmax = 10, kern_type = 'BT',plot=TRUE)
 }
