@@ -1,4 +1,4 @@
-################################################################################
+############which_max_v2######################################################
 #
 #' which_max_v2 An updated `which.max`
 #'
@@ -26,7 +26,7 @@ which_max_v2 <- function(z) {
   return(out)
 }
 
-################################################################################
+############clr2density########################################################
 #
 #' @title clr2density: Invert the clr transformation
 #'
@@ -50,7 +50,7 @@ clr2density <- function(z, z_step, clr)
   }
 }
 
-################################################################################
+############trapzc##############################################################
 #
 #' traczc - Trapezoidal Integration
 #'
@@ -67,7 +67,7 @@ trapzc <- function(step, y) {
 
 
 
-################################################################################
+############factor_to_sources###################################################
 #' factor_to_sources
 #'
 #' Function to convert factors back into sources
@@ -138,7 +138,7 @@ factor_to_sources <- function(factor_hat, dates, CLR_data, fd_data,flip=TRUE){
   )
 }
 
-################################################################################
+############run_flip############################################################
 #' run_flip
 #'
 #' @param SourceProfiles fill in
@@ -228,7 +228,7 @@ run_flip <- function(SourceProfiles,
   )
 }
 
-################################################################################
+############TS.contribution####################################################
 #' TS.contribution
 #' 
 #' Blah blah blah
@@ -285,7 +285,7 @@ TS.contribution <-
     )
   }
 
-################################################################################
+############FactorCIToSourcesCI#################################################
 #  FactorCIToSourcesCI
 #
 #' Convert Factor CIs to Source CIs
@@ -334,10 +334,10 @@ FactorCIToSourcesCI <- function(factor_CIs, Res.FTS) {
   return(list(LCIdf = LCIdf, UCIdf = UCIdf))
 }
 
-################################################################################
+############data.fd#############################################################
 #' data.fd
 #'
-#' Form a `fd` object from input data.
+#' Form a `fd` object from input data (without positive constrain)   
 #' 
 #' @param argvals fill in
 #' @param data fill in
@@ -388,7 +388,7 @@ data.fd <- function(argvals = NULL,
   ))
 }
 
-################################################################################
+#########diff_fd################################################################
 #' diff_fd
 #'
 #' 1-step difference of a data set in class `fd` format, returned as `fd`.
@@ -514,3 +514,5 @@ prodcf <- function(c, f, s) {
   )
 }
 
+
+#####################
