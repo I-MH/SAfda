@@ -609,6 +609,7 @@ PNSDdata_fd<-function(Dens,x,n.basis=20,k = 4,
     CLRData$x.fine<-x.fine
     CLRData$x.step<-x.step
     CLRData$centers<-centers
+    CLRData$norms<-c
     CLRData$densities<-densities
     CLRData$Dens.clr<-Dens.clr
     #fd.data
