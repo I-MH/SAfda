@@ -7,20 +7,24 @@
 factor_to_sources(factor_hat, dates, CLR_data, fd_data, flip = TRUE)
 }
 \arguments{
-\item{factor_hat}{output from FDF.R}
+\item{factor_hat}{Output from FDF.R}
 
-\item{dates}{??}
+\item{dates}{Data dates}
 
-\item{CLR_data}{??}
+\item{CLR_data}{Output from PNSDdata_fd}
 
-\item{fd_data}{??}
+\item{fd_data}{Output from PNSDdata_fd}
 }
 \value{
-list
+list()
+  SourceProfiles: densities 
+  SourceContributions: time series contributions 
+  and other metadata
 }
 \description{
-Function to convert factors back into sources
+After fitting a factor model (output from FDF) it transforms factors and 
+contributions to original density space
 }
 \examples{
-rnorm(1)
+see document 
 }

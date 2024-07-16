@@ -62,10 +62,11 @@ list()
   Ob_result: (not for users)
 }
 \description{
-FDF
+Fits a functional dynamic factor model for Hilbert space data, can be applied to densities data after 
+preprocessing with PNSDdata_fd
 }
 \examples{
-data(Data2011)
+data(fd.data2011)
 m<- 5
-factor_output1 <- FDF(data=fd.data,h=24*5,k=m,kmax = 10, kern_type = 'BT',plot=TRUE)
+factor_output1 <- FDF(data=fd.data2011,h=24*5,k=m,kmax = 10, kern_type = 'BT',plot=TRUE)
 }

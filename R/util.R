@@ -70,17 +70,23 @@ trapzc <- function(step, y) {
 ############factor_to_sources###################################################
 #' factor_to_sources
 #'
-#' Function to convert factors back into sources
+#' After fitting a factor model (output from FDF) it transforms factors and 
+#' contributions to original density space
 #' 
-#' @param factor_hat  output from FDF.R 
-#' @param dates ??
-#' @param CLR_data    ??
-#' @param fd_data    ??
+#' @param factor_hat  Output from FDF.R 
+#' @param dates Data dates
+#' @param CLR_data  Output from PNSDdata_fd
+#' @param fd_data   Output from PNSDdata_fd
 #'
-#' @return list
+#' @return list()
+#'   SourceProfiles: densities 
+#'   SourceContributions: time series contributions 
+#'   and other metadata
+#'   
 #' @export
 #'
-#' @examples rnorm(1)
+#' @examples 
+#' see document 
 factor_to_sources <- function(factor_hat, dates, CLR_data, fd_data,flip=TRUE){
 
   # log.x new sequence but can be anything!
@@ -515,16 +521,29 @@ prodcf <- function(c, f, s) {
 }
 
 
-#####################PNSDdata_fd
+#####################PNSDdata_fd #doc-ready####################################
 #' PNSDdata_fd
 #' 
-#' A function to 
+#' Preprocess raw PNSD to functional representation for densities 
 #'
-#' @return fd
+#' @param Dens A matrix, `m x n`, where `m` is the number of PNSD.
+#' @param x A vector with particle number sizes grid.
+#' @param nbasis Number of basis functions to be used for the functional data.
+#' @param k  Order of spline, degree = k-1
+#' @param der Derivation (see smoothing_spline0) 
+#' @param alpha Smoothing parameter
+#' @param lambda  Non-negative real number, smoothing parameter to be applied to the estimated functional parameter. If NULL, estimated using generalized CV.
+#' @param ch See smoothing_spline0
+#'
+#' @return list()
+#'  CLRData parameters concerning preprocess and transformation to clr data
+#'  fd.data functional representation of densities in Hilbert space
 #' @export
 #'
 #' @examples
-#' 
+#' data(Dens2011)
+#' data(ps2011)
+#' Test<-PNSDdata_fd(Dens2011[11:20,],ps2011)
 PNSDdata_fd<-function(Dens,x,n.basis=20,k = 4,
                         der = 2,
                         alpha = 0.999,
@@ -533,7 +552,7 @@ PNSDdata_fd<-function(Dens,x,n.basis=20,k = 4,
     #x: vector of particle sizes  
     #         k = order of spline, degree = k-1
     #         der = derivation.
-    #         alfa = smoothing parameter
+    #         alpha = smoothing parameter
     #         ch ={1,2};  ch=1: functional with (1-alfa) and alfa
     #                     ch=2: funkcional with alfa   
     

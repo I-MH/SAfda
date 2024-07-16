@@ -6,9 +6,33 @@
 \usage{
 PNSDdata_fd(Dens, x, n.basis = 20, k = 4, der = 2, alpha = 0.999, ch = 1)
 }
+\arguments{
+\item{Dens}{A matrix, `m x n`, where `m` is the number of PNSD.}
+
+\item{x}{A vector with particle number sizes grid.}
+
+\item{k}{Order of spline, degree = k-1}
+
+\item{der}{Derivation (see smoothing_spline0)}
+
+\item{alpha}{Smoothing parameter}
+
+\item{ch}{See smoothing_spline0}
+
+\item{nbasis}{Number of basis functions to be used for the functional data.}
+
+\item{lambda}{Non-negative real number, smoothing parameter to be applied to the estimated functional parameter. If NULL, estimated using generalized CV.}
+}
 \value{
-fd
+list()
+ CLRData parameters concerning preprocess and transformation to clr data
+ fd.data functional representation of densities in Hilbert space
 }
 \description{
-A function to
+Preprocess raw PNSD to functional representation for densities
+}
+\examples{
+data(Dens2011)
+data(ps2011)
+Test<-PNSDdata_fd(Dens2011[11:20,],ps2011)
 }

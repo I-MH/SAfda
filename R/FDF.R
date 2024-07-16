@@ -1,9 +1,8 @@
-#
-#  this file is largely done and refactored; just need to check the docs, and write unit tests,
-#  and put in sanity checks at the start.
-#
 #' FDF
 #'
+#' Fits a functional dynamic factor model for Hilbert space data, can be applied to densities data after 
+#' preprocessing with PNSDdata_fd
+#' 
 #' @param argvals  A vector containing the points where the function values are observed. If NULL, assumed to be equally spaced in rangeval.
 #' @param data A matrix, `m x N`, where `N` is the number of curves.
 #' @param stationary Logical, TRUE implies stationarity.
@@ -32,9 +31,10 @@
 #'   Ob_result: (not for users)
 #' @export
 #'
-#' @examples data(Data2011)
+#' @examples 
+#' data(fd.data2011)
 #' m<- 5
-#' factor_output1 <- FDF(data=fd.data,h=24*5,k=m,kmax = 10, kern_type = 'BT',plot=TRUE)
+#' factor_output1 <- FDF(data=fd.data2011,h=24*5,k=m,kmax = 10, kern_type = 'BT',plot=TRUE)
 FDF <- function(argvals = NULL,
                 data,
                 stationary = TRUE,
