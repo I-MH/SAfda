@@ -1,9 +1,11 @@
 #' lrc Long-Run Covariance
 #'
 #' Estimates the long-run covariance operator, as discussed originally in
-#' Aue, A., Rice, G. and Sönmez, O. "Detecting and dating structural breaks in functional data without dimension reduction." Journal of the Royal Statistical Society Series B: Statistical Methodology 80.3 (2018): 509-529.
+#' Rice, G., and Shang, H.L. (2017), "A Plug-in Bandwidth Selection Procedure for Long-run 
+#' Covariance Estimation with Stationary Functional Time Series", 
+#' Journal of Time Series Analysis, 38, 591–609.
 #'
-#' @param datafd Input data, in FD format.
+#' @param datafd Input data, in functional data object.
 #' @param kern_type Kernel type, switched internally to \code{c("BT", "PR", "SP", "FT", "flat")} which are Bartlett, Parzen, Simple, flat_top or flat kernels.
 #' @param h The bandwidth parameter, strictly non-zero.
 #'
@@ -15,7 +17,6 @@
 #' @export
 #'
 #' @examples 
-#' rnorm(1)
 lrc <- function(datafd, kern_type, h) {
 
   stopifnot(fda::is.fd(datafd), is.character(kern_type),
