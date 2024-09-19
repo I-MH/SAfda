@@ -69,6 +69,7 @@ Fits a functional dynamic factor model for Hilbert space data, can be applied to
 preprocessing with PNSDdata_fd
 }
 \examples{
+library(fda)
 data(fd.data2011)
 m<- 5
 factor_output1 <- FDF(data=fd.data2011,h=24*5,k=m,kmax = 10, 

@@ -39,6 +39,7 @@
 #' @importFrom fda inprod
 #'
 #' @examples 
+#' library(fda)
 #' data(fd.data2011)
 #' m<- 5
 #' factor_output1 <- FDF(data=fd.data2011,h=24*5,k=m,kmax = 10, 
