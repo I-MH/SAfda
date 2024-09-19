@@ -1,4 +1,4 @@
-#' CI_Bootstrap
+#' CI.FDF
 #'
 #' Computes the Bootstrapped confidence intervals for the PFF model
 #'
@@ -11,7 +11,8 @@
 #' @return  
 #'   A list with: 
 #' \itemize{
-#'   \item \code{Bootstrap.sample} - bootstrapped sample of dimension length(xarg) x #factors x n.rep
+#'   \item \code{Bootstrap.sample} - an array of dimension length(xarg) x #factors x n.rep 
+#'   containing the bootstrapped sample
 #'   \item \code{x} - same as \code{xarg} from input
 #'   \item \code{lower} - bootstrapped lower CI for all factors in fd format
 #'   \item \code{upper} - bootstrapped upper CI for all factors in fd format
@@ -29,14 +30,14 @@
 #' m<- 2
 #' factor_output1 <- FDF(data=fd.data2011,h=24*5,k=m,kmax = 10, 
 #'                       kern_type = 'BT',plot=TRUE)
-#' example.bootstrap <- CI_Bootstrap(factor_output1,xarg=CLRData2011$x.fine,
+#' example.bootstrap <- CI.FDF(factor_output1,xarg=CLRData2011$x.fine,
 #'                                    n.rep = 10)
 #'
 #' plot(factor_output1$hat.F, lty = 1)
 #' plot(example.bootstrap$lower, lty = 2, add = TRUE)
 #' plot(example.bootstrap$upper, lty = 2, add = TRUE)
 #'
-CI_Bootstrap <- function(fit,
+CI.FDF <- function(fit,
                          xarg,
                          n.sample = NULL,
                          n.rep = 100) {
