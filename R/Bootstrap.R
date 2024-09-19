@@ -29,7 +29,7 @@
 #' data(CLRData2011)
 #' m<- 2
 #' factor_output1 <- FDF(data=fd.data2011,h=24*5,k=m,kmax = 10, 
-#'                       kern_type = 'BT',plot=TRUE)
+#'                       kern_type = 'BT')
 #' example.bootstrap <- CI.FDF(factor_output1,xarg=CLRData2011$x.fine,
 #'                                    n.rep = 10)
 #'
