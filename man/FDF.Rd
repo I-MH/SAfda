@@ -52,14 +52,16 @@ FDF(
 }
 \value{
 A list with: 
-  hat.beta: the estimated time series
-  hat.F: the estimated F
-  hat.K_ratio: the estimated number of factors
-  Xhat: fitted values of the data
-  eigenval: eigenvalues of the long run cov
-  eigenvalC0: eigenvalues of the cov at lag 0
-  Ob: (not for users)
-  Ob_result: (not for users)
+\itemize{
+  \item hat.beta - the estimated time series
+  \item hat.F - the estimated F
+}
+hat.K_ratio the estimated number of factors
+Xhat fitted values of the data
+eigenval eigenvalues of the long run cov
+eigenvalC0 eigenvalues of the cov at lag 0
+Ob (not for users)
+Ob_result (not for users)
 }
 \description{
 Fits a functional dynamic factor model for Hilbert space data, can be applied to densities data after 
