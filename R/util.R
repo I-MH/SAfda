@@ -211,55 +211,6 @@ TS.contribution <-
     )
   }
 
-############FactorCIToSourcesCI#################################################
-#  FactorCIToSourcesCI
-#
-#' Convert Factor CIs to Source CIs
-#'
-#' @param factor_CIs fill in
-#' @param Res.FTS fill in
-#'
-#' @return list
-#' @export
-#'
-#' @examples rnorm(1)
-FactorCIToSourcesCI <- function(factor_CIs, Res.FTS) {
-
-  #log.x new sequence but can be anything!
-  log.x <- Res.FTS$log.x
-  
-  # num of selected factors 
-  kbar <- dim(Res.FTS$SourceProfiles)[2] 
-  
-  # Transform to Bayes space of factors ------------------------------------------
-  hat.fM <- matrix(0, nrow = length(log.x), ncol = kbar)
-  Boot.fM <- factor_CIs$Bootstrap.sample
-  for (i in 1:kbar) {
-    Aux <- matrix(0, nrow = length(log.x),
-                  ncol = length(factor_CIs$Bootstrap.sample[1, i, ]))
-    for(ib in 1:length(factor_CIs$Bootstrap.sample[1, i, ])) {
-      Aux[, ib] <- clr2density(log.x, z_step = Res.FTS$x.step,
-                               factor_CIs$Bootstrap.sample[, i, ib])
-    }
-    Boot.fM[, i, ] <- Aux
-  }
-  
-  #CI ribbons
-  LCIdf <- data.frame(x = exp(log.x))
-  UCIdf <- data.frame(x = exp(log.x))
-  signs <- Res.FTS$signs
-  sig2 <- Res.FTS$sig2
-  for (j in 1:kbar) {
-    Aux <- apply(Boot.fM[, j, ], 2, function(y) {
-        prodcf(signs[j] * sig2[j], f = y, s = log.x)$cf })
-    df <- data.frame(LCI = Res.FTS$SourceProfiles[, j] - 2 * apply(Aux, 1, sd))
-    dfU <- data.frame(UCI = Res.FTS$SourceProfiles[, j] + 2 * apply(Aux, 1, sd))
-    LCIdf <- cbind(LCIdf, df)
-    UCIdf <- cbind(UCIdf, dfU)
-  }
-  return(list(LCIdf = LCIdf, UCIdf = UCIdf))
-}
-
 ############data.fd#############################################################
 #' data.fd
 #'

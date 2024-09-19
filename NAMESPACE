@@ -2,7 +2,6 @@
 
 export(CI.FDF)
 export(FDF)
-export(FactorCIToSourcesCI)
 export(Kernel)
 export(PFF)
 export(PNSDdata.fd)

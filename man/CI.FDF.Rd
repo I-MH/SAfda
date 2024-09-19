@@ -27,7 +27,7 @@ A list with:
 }
 }
 \description{
-Computes the Bootstrapped confidence intervals for the PFF model
+Computes the Bootstrapped confidence intervals for the FDF model
 }
 \examples{
 library(fda)

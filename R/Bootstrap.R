@@ -1,6 +1,6 @@
 #' CI.FDF
 #'
-#' Computes the Bootstrapped confidence intervals for the PFF model
+#' Computes the Bootstrapped confidence intervals for the FDF model
 #'
 #' @param fit Ouput fit from \code{FDF} function.
 #' @param xarg The \code{CLRdata$x.fine} found in output from \code{PNSDdata_fd} function.
