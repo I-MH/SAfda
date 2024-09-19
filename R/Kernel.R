@@ -1,6 +1,3 @@
-#
-#  this file is largely done and refactored; just need to check the docs (i and h), and write unit tests.
-#
 #' Kernel
 #'
 #' Given an input parameter `kerneltype`, returns the functional form of the kernel
