@@ -53,15 +53,16 @@ FDF(
 \value{
 A list with: 
 \itemize{
-  \item hat.beta - the estimated time series
-  \item hat.F - the estimated F
+  \item \code{hat.beta} - the estimated time series
+  \item \code{hat.F} - the estimated F
+  \item \code{hat.K_ratio} - the estimated number of factors
+  \item \code{hat.K_ratio} - the estimated number of factors
+  \item \code{Xhat} - fitted values of the data
+  \item \code{eigenval} - eigenvalues of the long run cov
+  \item \code{eigenvalC0} - eigenvalues of the cov at lag 0
+  \item \code{Ob} - (not for users)
+  \item \code{Ob_result} - (not for users)
 }
-hat.K_ratio the estimated number of factors
-Xhat fitted values of the data
-eigenval eigenvalues of the long run cov
-eigenvalC0 eigenvalues of the cov at lag 0
-Ob (not for users)
-Ob_result (not for users)
 }
 \description{
 Fits a functional dynamic factor model for Hilbert space data, can be applied to densities data after 
@@ -70,5 +71,11 @@ preprocessing with PNSDdata_fd
 \examples{
 data(fd.data2011)
 m<- 5
-factor_output1 <- FDF(data=fd.data2011,h=24*5,k=m,kmax = 10, kern_type = 'BT',plot=TRUE)
+factor_output1 <- FDF(data=fd.data2011,h=24*5,k=m,kmax = 10, 
+                      kern_type = 'BT',plot=TRUE)
+                      
+ plot(factor_output1$hat.F, main='Profiles')
+ matplot(factor_output1$hat.beta, type='l', 
+         main=expression(paste('Time series ',beta[t])),
+         xlab= 'time')
 }
