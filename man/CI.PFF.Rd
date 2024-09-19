@@ -2,8 +2,7 @@
 % Please edit documentation in R/CIPFF.R
 \name{CI.PFF}
 \alias{CI.PFF}
-\title{Convert the Bootstrapped confidence intervals for the FDF model into 
-confidence intervals for the PFF model}
+\title{CI.PFF}
 \usage{
 CI.PFF(factor_CIs, fit.PFF)
 }

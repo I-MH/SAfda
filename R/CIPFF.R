@@ -1,5 +1,5 @@
-#  CI.PFF
-#
+#'  CI.PFF
+#'
 #' Convert the Bootstrapped confidence intervals for the FDF model into 
 #' confidence intervals for the PFF model 
 #'
