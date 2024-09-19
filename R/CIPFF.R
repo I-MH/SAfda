@@ -1,4 +1,4 @@
-#'  CI.PFF
+#' CI.PFF
 #'
 #' Convert the Bootstrapped confidence intervals for the FDF model into 
 #' confidence intervals for the PFF model 
@@ -14,22 +14,23 @@
 #'
 #' @examples 
 #' library(fda)
-#' data(fd.data2011);data(CLRData2011)
+#' data(fd.data2011)
+#' data(CLRData2011)
 #' m<- 2
-#' ## Model fit
+#' 
 #' factor_output1 <- FDF(data=fd.data2011,h=24*5,k=m,kmax = 10, 
 #'                       kern_type = 'BT')
 #' PFF.output<-PFF(factor_output1,dates,CLRData,fd.data)
-#' ## CI 
+#' 
 #' set.seed(5643)
 #' factor_CIs<-CI.FDF(factor_output1,xarg=CLRData2011$x.fine,n.rep = 10)
 #' Sources_CIs<-CI.PFF(factor_CIs=factor_CIs,fit.PFF=PFF.output)
 #' 
 #' matplot(PFF.output$SourceProfiles, main='Sources',type='l',lty=1)
 #' matplot(Sources_CIs$LCIdf[,-1], type='l', lty = 2, add = TRUE)        
-#' matplot(Sources_CIs$UCIdf[,-1], type='l', lty = 2, add = TRUE)        
-CI.PFF <- function(factor_CIs, fit.PFF){
-  
+#' matplot(Sources_CIs$UCIdf[,-1], type='l', lty = 2, add = TRUE)    
+#'     
+CI.PFF <- function(factor_CIs,fit.PFF){
   #log.x new sequence but can be anything!
   log.x <- fit.PFF$log.x
   
