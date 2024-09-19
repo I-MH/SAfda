@@ -7,7 +7,7 @@
 lrc(datafd, kern_type, h)
 }
 \arguments{
-\item{datafd}{Input data, in FD format.}
+\item{datafd}{Input data, in functional data object.}
 
 \item{kern_type}{Kernel type, switched internally to \code{c("BT", "PR", "SP", "FT", "flat")} which are Bartlett, Parzen, Simple, flat_top or flat kernels.}
 
@@ -18,8 +18,7 @@ list
 }
 \description{
 Estimates the long-run covariance operator, as discussed originally in
-Aue, A., Rice, G. and Sönmez, O. "Detecting and dating structural breaks in functional data without dimension reduction." Journal of the Royal Statistical Society Series B: Statistical Methodology 80.3 (2018): 509-529.
-}
-\examples{
-rnorm(1)
+Rice, G., and Shang, H.L. (2017), "A Plug-in Bandwidth Selection Procedure for Long-run 
+Covariance Estimation with Stationary Functional Time Series", 
+Journal of Time Series Analysis, 38, 591–609.
 }
