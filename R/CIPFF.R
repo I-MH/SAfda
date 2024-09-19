@@ -28,8 +28,7 @@
 #' matplot(PFF.output$SourceProfiles, main='Sources',type='l',lty=1)
 #' matplot(Sources_CIs$LCIdf[,-1], type='l', lty = 2, add = TRUE)        
 #' matplot(Sources_CIs$UCIdf[,-1], type='l', lty = 2, add = TRUE)        
-
-CI.PFF <- function(factor_CIs, fit.PFF) {
+CI.PFF <- function(factor_CIs, fit.PFF){
   
   #log.x new sequence but can be anything!
   log.x <- fit.PFF$log.x
