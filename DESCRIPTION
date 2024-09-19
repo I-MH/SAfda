@@ -8,6 +8,6 @@ Description: This package fits the Functional dynamic factor model for density f
 License: GPL-2
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.3.1
+RoxygenNote: 7.3.2
 Depends: 
     R (>= 2.10)

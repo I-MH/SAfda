@@ -46,12 +46,12 @@ FDF(
 
 \item{lambda}{Non-negative real number, smoothing parameter to be applied to the estimated functional parameter. If NULL, estimated using generalized CV.}
 
-\item{replicates}{???}
+\item{replicates}{For developer's exclusive use (default NULL)}
 
 \item{plot}{Logical, plot to be displayed or not.}
 }
 \value{
-list()
+A list with: 
   hat.beta: the estimated time series
   hat.F: the estimated F
   hat.K_ratio: the estimated number of factors

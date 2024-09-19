@@ -15,12 +15,13 @@
 #' @param nbasis Number of basis functions to be used for the functional data.
 #' @param basis Type of basis, from options 'Fourier' and 'Bspline'
 #' @param lambda  Non-negative real number, smoothing parameter to be applied to the estimated functional parameter. If NULL, estimated using generalized CV.
-#' @param replicates  ???
+#' @param replicates For developer's exclusive use (default NULL)
 #' @param plot  Logical, plot to be displayed or not.
 #'
 #' @importFrom fda fd
 #'
-#' @return  list()
+#' @return  
+#'   A list with: 
 #'   hat.beta: the estimated time series
 #'   hat.F: the estimated F
 #'   hat.K_ratio: the estimated number of factors
