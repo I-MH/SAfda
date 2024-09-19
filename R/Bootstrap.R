@@ -1,20 +1,21 @@
 #' CI_Bootstrap
 #'
-#' Compute the Bootstrapped Confidence Intervals
+#' Computes the Bootstrapped confidence intervals for the PFF model
 #'
 #' @param fit Ouput fit from \code{FDF} function.
 #' @param xarg The \code{CLRdata$x.fine} found in output from \code{PNSDdata_fd} function.
-#' @param n.rep  Size for of bootstrap samples.
-#' @param n.sample Original data sample size (used to limit the range of the bootstrap). No need if raw data is large enough. 
+#' @param n.rep  Size of bootstrap samples.
+#' @param n.sample Original data sample size (used to limit the range of the bootstrap). 
+#'                No need if raw data is large enough. 
 #'
 #' @return  
 #'   A list with: 
 #' \itemize{
-#'   \item matrix - the estimated time series
+#'   \item \code{Bootstrap.sample} - bootstrapped sample of dimension length(xarg) x #factors x n.rep
+#'   \item \code{x} - same as \code{xarg} from input
+#'   \item \code{lower} - bootstrapped lower CI for all factors in fd format
+#'   \item \code{upper} - bootstrapped upper CI for all factors in fd format
 #' }
-#' - \emph{matrix}: length(xarg) 
-#' @return x num_factors containing the sd evaluated at xarg
-#'    x: a vector containing values where sd is evaluated
 #'    
 #' @export
 #'
@@ -22,15 +23,18 @@
 #' @importFrom fda eval.fd
 #'
 #' @examples
-#'  example.bootstrap <-
-#'    CI.Bootstrap(fit = factor.hat,
-#'                 xarg,
-#'                 n.sample = 2000,
-#'                 n.rep = 100)
+#' library(fda)
+#' data(fd.data2011)
+#' data(CLRData2011)
+#' m<- 2
+#' factor_output1 <- FDF(data=fd.data2011,h=24*5,k=m,kmax = 10, 
+#'                       kern_type = 'BT',plot=TRUE)
+#' example.bootstrap <- CI_Bootstrap(factor_output1,xarg=CLRData2011$x.fine,
+#'                                    n.rep = 10)
 #'
-#'  plot(factor.hat$hat.F, lty = 1)
-#'  plot(example.bootstrap$lower, lty = 2, add = TRUE)
-#'  plot(example.bootstrap$upper, lty = 2, add = TRUE)
+#' plot(factor_output1$hat.F, lty = 1)
+#' plot(example.bootstrap$lower, lty = 2, add = TRUE)
+#' plot(example.bootstrap$upper, lty = 2, add = TRUE)
 #'
 CI_Bootstrap <- function(fit,
                          xarg,
