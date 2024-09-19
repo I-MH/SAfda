@@ -1,14 +1,19 @@
 #' CI_Bootstrap
 #'
-#' Bootstrapped Confidence Intervals
+#' Compute the Bootstrapped Confidence Intervals
 #'
-#' @param data Functional input data.
-#' @param xarg The \code{x.fine} CLRdata 
-#' @param n.sample Number of samples in the input; used to limit the range of the bootstrap
-#' @param n.rep  Number of replicates for the bootstrap
+#' @param fit Ouput fit from \code{FDF} function.
+#' @param xarg The \code{CLRdata$x.fine} found in output from \code{PNSDdata_fd} function.
+#' @param n.rep  Size for of bootstrap samples.
+#' @param n.sample Original data sample size (used to limit the range of the bootstrap). No need if raw data is large enough. 
 #'
-#' @return
-#'    matrix: length(xarg) x num_factors containing the sd evaluated at xarg
+#' @return  
+#'   A list with: 
+#' \itemize{
+#'   \item matrix - the estimated time series
+#' }
+#' - \emph{matrix}: length(xarg) 
+#' @return x num_factors containing the sd evaluated at xarg
 #'    x: a vector containing values where sd is evaluated
 #'    
 #' @export
@@ -18,7 +23,7 @@
 #'
 #' @examples
 #'  example.bootstrap <-
-#'    CI.Bootstrap(data = factor.hat,
+#'    CI.Bootstrap(fit = factor.hat,
 #'                 xarg,
 #'                 n.sample = 2000,
 #'                 n.rep = 100)
@@ -27,29 +32,29 @@
 #'  plot(example.bootstrap$lower, lty = 2, add = TRUE)
 #'  plot(example.bootstrap$upper, lty = 2, add = TRUE)
 #'
-CI_Bootstrap <- function(data,
+CI_Bootstrap <- function(fit,
                          xarg,
                          n.sample = NULL,
                          n.rep = 100) {
 
   # assumes that the input is a factor structured object
-  stopifnot("kern_type" %in% names(data))
+  stopifnot("kern_type" %in% names(fit))
   
   ### TODO: MOAR SANITY CHECKS
   
   # lag parameter to be used to estimate long-run cov 
-  h <- data$h 
+  h <- fit$h 
   if (is.null(n.sample)) {
     n.sample <- max(c(h + 10, 500))
   }
-  n.factors <- dim(data$hat.F$coefs)[2]
-  n.basis <- dim(data$hat.F$coefs)[1]
-  residuals.fd <- data$error.fd
-  kern_type <- data$kern_type
+  n.factors <- dim(fit$hat.F$coefs)[2]
+  n.basis <- dim(fit$hat.F$coefs)[1]
+  residuals.fd <- fit$error.fd
+  kern_type <- fit$kern_type
 
   # allow different values for seasonal data analysis
-  sz.data <- dim(data$hat.beta)[1]
-  sz.data.res <- dim(residuals.fd$coefs)[2]
+  sz.fit <- dim(fit$hat.beta)[1]
+  sz.fit.res <- dim(residuals.fd$coefs)[2]
 
   # discrete version of the factors
   Bootstrap.sample <- array(data = NA, dim = c(length(xarg), n.factors, n.rep)) 
@@ -57,25 +62,25 @@ CI_Bootstrap <- function(data,
   Bootstrap.coeff <- array(data = NA, dim = c(n.basis, n.factors, n.rep))
   
   # time where bootstrap sample starts
-  idx.start.bootstrap <- sample(1:(sz.data - n.sample + 1), n.rep, replace = TRUE) 
+  idx.start.bootstrap <- sample(1:(sz.fit - n.sample + 1), n.rep, replace = TRUE) 
   
   # could be refactored to run as a lapply() or something more efficient
   for (j in 1:n.rep) {
     # bootstrap on the index to obtain the residual bootstrap replicate 
-    idx.res.bootstrap <- sample(x = 1:sz.data.res, size = n.sample)
+    idx.res.bootstrap <- sample(x = 1:sz.fit.res, size = n.sample)
     
     # obtain bootstrap sample 
-    coeff.fit.boot <- data$Xhat.fd$coefs[, idx.start.bootstrap[j]:(idx.start.bootstrap[j] + n.sample - 1)]
+    coeff.fit.boot <- fit$Xhat.fd$coefs[, idx.start.bootstrap[j]:(idx.start.bootstrap[j] + n.sample - 1)]
     coeff.res.boot <- residuals.fd$coefs[, idx.res.bootstrap]
     
     # coefficients of basis functions of a sample Bootstrap
-    coeff.data.boot <- coeff.fit.boot + coeff.res.boot
+    coeff.fit.boot <- coeff.fit.boot + coeff.res.boot
 
     # convert into functional data object
-    data.boot.fd <- fda::fd(coeff.data.boot, data$Xhat.fd$basis)
+    fit.boot.fd <- fda::fd(coeff.fit.boot, fit$Xhat.fd$basis)
 
     # apply the FDF function to the replicate
-    factor.boot <- FDF(data = data.boot.fd,
+    factor.boot <- FDF(data = fit.boot.fd,
                        h = h,
                        k = n.factors,
                        kern_type = kern_type
@@ -83,15 +88,15 @@ CI_Bootstrap <- function(data,
 
     # fixing sing
     factor.boot$hat.F$coefs <- factor.boot$hat.F$coefs %*% 
-      diag(sign(diag(inprod(data$hat.F, factor.boot$hat.F))))
+      diag(sign(diag(inprod(fit$hat.F, factor.boot$hat.F))))
     Bootstrap.sample[, , j] <- fda::eval.fd(xarg, factor.boot$hat.F)
     Bootstrap.coeff[, , j] <- factor.boot$hat.F$coefs
   }
 
   sd.coeff <- apply(Bootstrap.coeff, c(1, 2), sd)
-  sd.fd <- fda::fd(sd.coeff, data$Xhat.fd$basis)
-  CI.lower <- fda::fd(data$hat.F$coefs - 1.96 * sd.coeff, data$Xhat.fd$basis)
-  CI.upper <- fda::fd(data$hat.F$coefs + 1.96 * sd.coeff, data$Xhat.fd$basis)
+  sd.fd <- fda::fd(sd.coeff, fit$Xhat.fd$basis)
+  CI.lower <- fda::fd(fit$hat.F$coefs - 1.96 * sd.coeff, fit$Xhat.fd$basis)
+  CI.upper <- fda::fd(fit$hat.F$coefs + 1.96 * sd.coeff, fit$Xhat.fd$basis)
 
   return(
     list(
