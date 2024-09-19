@@ -36,6 +36,8 @@
 #' 
 #' @export
 #'
+#' @importFrom fda inprod
+#'
 #' @examples 
 #' data(fd.data2011)
 #' m<- 5
