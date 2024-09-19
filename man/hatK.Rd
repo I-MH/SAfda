@@ -22,5 +22,5 @@ returns the index and the ratio values.
 }
 \examples{
 x <- rnorm(10)
-
+hatK(x)
 }
