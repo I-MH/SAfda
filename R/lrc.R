@@ -14,7 +14,8 @@
 #' @return list
 #' @export
 #'
-#' @examples rnorm(1)
+#' @examples 
+#' rnorm(1)
 lrc <- function(datafd, kern_type, h) {
 
   stopifnot(fda::is.fd(datafd), is.character(kern_type),

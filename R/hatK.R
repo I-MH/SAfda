@@ -1,20 +1,22 @@
-#
-#  this file is largely done and refactored; just need to check the docs, and write unit tests,
-#  and put in sanity checks at the start
-#
 #' hatK
 #'
 #' Computes the auxiliary K, as the ratio of each eigenvalue to its predecessor;
-#' returns the index and value of the minimum of such quotients.
+#' returns the index and the ratio values.
 #'
 #' @param evalues  Numeric vector of eigenvalues
 #'
-#' @return list
-#' hat_k  Index of the best k
-#' ratio_k  The value of the best k
+#' @return 
+#'  A list with: 
+#' \itemize{
+#' \item \code{hat_k}:  Index of the best k
+#' \item \code{ratio_k}:  values of the ratio
+#' }
+
 #' @export
 #'
-#' @examples rnorm(1)
+#' @examples 
+#' x <- rnorm(10)
+#' hatK(x)
 hatK <- function(evalues){
   k_aux <- evalues[-1] / evalues[-length(evalues)]
   index_k <- which.min(k_aux)
