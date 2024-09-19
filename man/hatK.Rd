@@ -10,14 +10,17 @@ hatK(evalues)
 \item{evalues}{Numeric vector of eigenvalues}
 }
 \value{
-list
-hat_k  Index of the best k
-ratio_k  The value of the best k
+A list with: 
+\itemize{
+\item \code{hat_k}:  Index of the best k
+\item \code{ratio_k}:  values of the ratio
+}
 }
 \description{
 Computes the auxiliary K, as the ratio of each eigenvalue to its predecessor;
-returns the index and value of the minimum of such quotients.
+returns the index and the ratio values.
 }
 \examples{
-rnorm(1)
+x <- rnorm(10)
+
 }

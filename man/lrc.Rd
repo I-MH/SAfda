@@ -21,5 +21,6 @@ Estimates the long-run covariance operator, as discussed originally in
 Aue, A., Rice, G. and Sönmez, O. "Detecting and dating structural breaks in functional data without dimension reduction." Journal of the Royal Statistical Society Series B: Statistical Methodology 80.3 (2018): 509-529.
 }
 \examples{
-rnorm(1)
+x <- rnorm(10)
+hatK(x)
 }
