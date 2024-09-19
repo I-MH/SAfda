@@ -4,27 +4,33 @@
 \alias{CI_Bootstrap}
 \title{CI_Bootstrap}
 \usage{
-CI_Bootstrap(data, xarg, n.sample = NULL, n.rep = 100)
+CI_Bootstrap(fit, xarg, n.sample = NULL, n.rep = 100)
 }
 \arguments{
-\item{data}{Functional input data.}
+\item{fit}{Ouput fit from \code{FDF} function.}
 
-\item{xarg}{The \code{x.fine} CLRdata}
+\item{xarg}{The \code{CLRdata$x.fine} found in output from \code{PNSDdata_fd} function.}
 
-\item{n.sample}{Number of samples in the input; used to limit the range of the bootstrap}
+\item{n.sample}{Original data sample size (used to limit the range of the bootstrap). No need if raw data is large enough.}
 
-\item{n.rep}{Number of replicates for the bootstrap}
+\item{n.rep}{Size for of bootstrap samples.}
 }
 \value{
-matrix: length(xarg) x num_factors containing the sd evaluated at xarg
+A list with: 
+\itemize{
+  \item matrix - the estimated time series
+}
+- \emph{matrix}: length(xarg)
+
+x num_factors containing the sd evaluated at xarg
    x: a vector containing values where sd is evaluated
 }
 \description{
-Bootstrapped Confidence Intervals
+Compute the Bootstrapped Confidence Intervals
 }
 \examples{
  example.bootstrap <-
-   CI.Bootstrap(data = factor.hat,
+   CI.Bootstrap(fit = factor.hat,
                 xarg,
                 n.sample = 2000,
                 n.rep = 100)
