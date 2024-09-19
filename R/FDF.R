@@ -46,20 +46,12 @@
 #' matplot(factor_output1$hat.beta, type='l', 
 #'          main=expression(paste('Time series ',beta[t])),
 #'          xlab= 'time')
-FDF <- function(argvals = NULL,
-                data,
-                stationary = TRUE,
-                h = 5,
-                k = NULL,
-                kmax = 6,
-                p = 5,
-                kern_type = "BT",
+FDF <- function(argvals = NULL, data, stationary = TRUE,
+                h = 5, k = NULL, kmax = 6,
+                p = 5, kern_type = "BT",
                 rangeval = c(0, 1),
-                nbasis = 25,
-                basis = 'Fourier',
-                lambda = NULL,
-                replicates = NULL,
-                plot = FALSE) {
+                nbasis = 25, basis = 'Fourier',
+                lambda = NULL, replicates = NULL, plot = FALSE) {
 
 
   # transform data to fd class ------------------------------
