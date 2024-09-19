@@ -43,7 +43,7 @@
 #' data(fd.data2011)
 #' m<- 5
 #' factor_output1 <- FDF(data=fd.data2011,h=24*5,k=m,kmax = 10, 
-#'                       kern_type = 'BT',plot=TRUE)
+#'                       kern_type = 'BT')
 #'                       
 #' plot(factor_output1$hat.F, main='Profiles')
 #' matplot(factor_output1$hat.beta, type='l', 
