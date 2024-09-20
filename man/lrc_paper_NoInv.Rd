@@ -2,7 +2,7 @@
 % Please edit documentation in R/lrc.R
 \name{lrc_paper_NoInv}
 \alias{lrc_paper_NoInv}
-\title{lrc_paper_NoInv Long-Run Covariance, Variant 2, No Inverse}
+\title{Estimation of the Lambda operator - Long-run covariance}
 \usage{
 lrc_paper_NoInv(datafd, kern_type, h, replicates = NULL)
 }
@@ -16,12 +16,19 @@ lrc_paper_NoInv(datafd, kern_type, h, replicates = NULL)
 \item{replicates}{Number of replicates (default NULL) for the ...}
 }
 \value{
-list
+A list with:
+\itemize{
+  \item \code{eigenf} - eigenfunctions of the operator
+  \item \code{eigenval} - eigenvalues of the operator
+  \item \code{lrc.k} - kernel of the lambda operator
+}
 }
 \description{
-Estimates the long-run covariance, as discussed originally in 
-[Israel's paper]. This is the variant without the inverse.
+Estimates the long-run covariance operator lambda described in the main paper.
 }
-\examples{
-rnorm(1)
+\details{
+This uses the method discussed originally in
+Rice, G., and Shang, H.L. (2017), "A Plug-in Bandwidth Selection Procedure for Long-run 
+Covariance Estimation with Stationary Functional Time Series", 
+Journal of Time Series Analysis, 38, 591–609.
 }
