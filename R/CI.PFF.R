@@ -6,12 +6,15 @@
 #' @param factor_CIs output object from \code{CI.FDF}
 #' @param fit.PFF output object from \code{PFF}
 #'
+#' @return
 #'   A list with: 
 #' \itemize{
 #'   \item \code{LCIdf} - a data.frame with bootstrapped lower CI for all factors
 #'   \item \code{UCIdf} - a data.frame with bootstrapped upper CI for all factors
 #' }
 #'
+#' @export
+#' 
 #' @examples 
 #' library(fda)
 #' data(fd.data2011)
@@ -29,15 +32,11 @@
 #' matplot(PFF.output$SourceProfiles, main='Sources',type='l',lty=1)
 #' matplot(Sources_CIs$LCIdf[,-1], type='l', lty = 2, add = TRUE)        
 #' matplot(Sources_CIs$UCIdf[,-1], type='l', lty = 2, add = TRUE)    
-#'     
 CI.PFF <- function(factor_CIs,fit.PFF){
-  #log.x new sequence but can be anything!
   log.x <- fit.PFF$log.x
-  
-  # num of selected factors 
   kbar <- dim(fit.PFF$SourceProfiles)[2] 
   
-  # Transform to Bayes space of factors ------------------------------------------
+  # Transform to Bayes space of factors 
   hat.fM <- matrix(0, nrow = length(log.x), ncol = kbar)
   Boot.fM <- factor_CIs$Bootstrap.sample
   for (i in 1:kbar) {

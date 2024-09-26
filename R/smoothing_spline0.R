@@ -20,9 +20,6 @@
 #' @importFrom splines splineDesign
 #'
 #' @return A list of three objects: `list(J, z, spline0))`
-#' @export
-#'
-#' @example rnorm(1)
 smoothing_spline0 = function(knots,
                             tp,
                             f,
