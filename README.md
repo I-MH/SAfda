@@ -8,12 +8,13 @@ This *Rpackage* is based on the methodology presented in
 ## Install from GitHub
 
 library(devtools)
+
 install_github('I-MH/SAfda')
 
 ## Package Dependencies
-require(fda)
-require(robCompositions)
+- require(fda)
+- require(robCompositions)
 
 ## Tutorial
 A brief tutorial on how to use this *SAfda* package for PNSDA data can be found 
-\url{here}
+[Here](https://www.maths.lancs.ac.uk/~euancamp/)
