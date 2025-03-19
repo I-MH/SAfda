@@ -17,4 +17,4 @@ install_github('I-MH/SAfda')
 
 ## Tutorial
 A brief tutorial on how to use this *SAfda* package for PNSDA data can be found 
-[Here](https://www.maths.lancs.ac.uk/~euancamp/post/safda/)
+[Here](https://www.maths.lancs.ac.uk/~euancamp/blog/safda/)
