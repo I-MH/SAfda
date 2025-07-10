@@ -2,7 +2,7 @@
 
 This *SAfda Rpackage* is based on the methodology presented in 
 
-- Martinez-Hernandez, I., Euan, C., Burr, W., Meis, M., Blangiardo, M. and Pirani, M. *Modelling particle number size distribution: A continuous approach*. JRSS Series C (Applied Statistics, In press).
+- Martinez-Hernandez, I., Euan, C., Burr, W., Meis, M., Blangiardo, M. and Pirani, M. (2025) *Modelling particle number size distribution: A continuous approach*. JRSS Series C: Applied Statistics. https://doi.org/10.1093/jrsssc/qlae053
 
 
 ## Install from GitHub

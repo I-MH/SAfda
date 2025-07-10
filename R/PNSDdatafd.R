@@ -48,8 +48,9 @@ PNSDdata.fd<-function(Dens,x,n.basis=20,k = 4,
   #                     ch=2: funkcional with alfa   
   
   #Define grid for x in log scale------------------------------------------------
-  # If data is integer then lowbound.x has to be changed! to x-epsilon
   lowbound.x<-floor(x)[1]
+  # If data is integer then lowbound.x has to be changed! to x-epsilon
+  if(lowbound.x==x[1]) lowbound.x<-x[1]-0.1
   log.x=c(log(lowbound.x),log(x))
   # x.fine must be of length 1000 to match SmoothingSpline.R
   x.fine = seq(min(log.x), max(log.x), length=1000) 
